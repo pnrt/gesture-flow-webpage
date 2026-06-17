@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Gesture Flow</title>
+    <link rel="icon" type="image/png" href="new_hippo_web.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.15);
+            --accent: #7c3aed;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --bg-body: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border: #e2e8f0;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 120px 24px; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 48px);
+            max-width: 1200px;
+            height: 72px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        .logo { font-size: 22px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 12px; text-decoration: none; letter-spacing: -1px; }
+        .logo img { width: 38px; height: 38px; object-fit: contain; }
+
+        h1 { font-size: 48px; font-weight: 800; letter-spacing: -2px; margin-bottom: 16px; color: var(--dark); }
+        h2 { font-size: 24px; font-weight: 800; margin-top: 48px; margin-bottom: 24px; color: var(--dark); display: flex; align-items: center; gap: 12px; }
+        h2::before { content: ''; display: block; width: 4px; height: 24px; background: var(--primary); border-radius: 4px; }
+        h3 { font-size: 18px; font-weight: 700; margin-top: 32px; margin-bottom: 16px; color: var(--primary); }
+
+        p { margin-bottom: 1.5em; color: var(--text-main); font-size: 16px; }
+        ul { margin-bottom: 1.5em; padding-left: 20px; list-style-type: none; }
+        li { margin-bottom: 12px; position: relative; padding-left: 24px; color: var(--text-main); }
+        li::before { content: '•'; color: var(--primary); font-weight: bold; position: absolute; left: 0; }
+
+        .disclosure-card {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .data-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin: 32px 0;
+        }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: white; }
+        th { background: var(--bg-subtle); padding: 16px; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+        td { padding: 16px; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--text-main); }
+        tr:last-child td { border-bottom: none; }
+
+        .footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        strong { color: var(--dark); font-weight: 700; }
+        code { font-family: var(--font-mono); background: var(--bg-subtle); padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+        a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            nav { width: calc(100% - 24px); padding: 0 20px; }
+            h1 { font-size: 36px; }
+            .container { padding-top: 100px; }
+            .disclosure-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="new_hippo_web.png" alt="GestureFlow Hippo Logo">
+            GestureFlow
+        </a>
+        <a href="index.html" class="btn btn-outline" style="padding: 10px 20px; font-size: 13px;">Back to Home</a>
+    </nav>
+
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p><strong>Last updated: June 17, 2026</strong></p>
+
+        <p><strong>Pankaj Kumar Rout</strong> (referred to as "we", "us", or "our") provides the <strong>Gesture Flow</strong> mobile application as a professional automation service. This document outlines our strict "Privacy-by-Default" architecture and explains how we handle technical permissions.</p>
+
+        <div class="disclosure-card">
+            <h2>1. Accessibility Service API</h2>
+            <p><strong>Gesture Flow</strong> requires the use of the Android <strong>Accessibility Service API</strong> to function. This is a sensitive permission that allows the app to interact with the device screen.</p>
+
+            <h3>How we use this API:</h3>
+            <ul>
+                <li><strong>Gesture Simulation:</strong> To perform automated taps, swipes, and multi-touch events defined in your workflows.</li>
+                <li><strong>UI Analysis:</strong> To "read" screen content (text labels and button positions) so your automation can react to changes in real-time.</li>
+                <li><strong>Automation Execution:</strong> To trigger specific actions when a certain UI state is detected.</li>
+            </ul>
+
+            <h3>Data Handling Guarantee:</h3>
+            <p>We operate on a <strong>Zero-Leak Policy</strong>. The Accessibility Service is used <strong>exclusively</strong> for local automation execution. We do NOT use this API to:</p>
+            <ul>
+                <li>Collect or monitor private conversations, passwords, or financial data.</li>
+                <li>Store any screen data to permanent storage (all UI scanning happens in volatile RAM and is immediately wiped).</li>
+                <li>Transmit any data seen on your screen to ourselves or any third party.</li>
+            </ul>
+        </div>
+
+        <h2>2. Zero-Collection Policy</h2>
+        <p>Consistent with our local-only philosophy, <strong>Gesture Flow</strong> does not collect any user data. Below is our compliance map for the Google Play Data Safety section:</p>
+
+        <div class="data-table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data Category</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Personal Info</strong></td>
+                        <td>Not Collected</td>
+                        <td>No names, emails, or phone numbers are ever requested.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>App Activity</strong></td>
+                        <td>Not Collected</td>
+                        <td>We do not track which apps you automate or how often you use them.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Device IDs</strong></td>
+                        <td>Not Collected</td>
+                        <td>We do not store IMEI, Android ID, or other identifiers.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User Content</strong></td>
+                        <td>Not Collected</td>
+                        <td>Your workflows and scripts never leave your device.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>3. Local Storage & Encryption</h2>
+        <p>All application data, including your automation pipelines and local variables, is stored in a private, encrypted database on your device. This data is isolated from other apps and is inaccessible to us. Your data only leaves the app if you <strong>manually</strong> initiate a "Share" or "Export" action.</p>
+
+        <h2>4. Internet Usage & Offline Modes</h2>
+        <p>The app is designed to be <strong>Fully Functional Offline</strong>. Internet access is only requested for specific technical reasons:</p>
+        <ul>
+            <li><strong>User-Initiated API Nodes:</strong> Only if you explicitly configure a workflow to call a specific URL or webhook.</li>
+            <li><strong>Monetization (Ads & Billing):</strong> Standard technical calls to Google AdMob and Google Play Billing.</li>
+            <li><strong>Notification Nodes:</strong> Used locally to alert the user of workflow status.</li>
+        </ul>
+
+        <h2>5. Children’s Privacy (COPPA)</h2>
+        <p>Our service is not intended for use by children under the age of 13. We do not knowingly collect or request any personal information from children. Since we do not collect any user data globally, we do not maintain any records that would identify a user's age.</p>
+
+        <h2>6. Data Deletion & Retention</h2>
+        <p>Because we do not store your data on any servers, we cannot delete it for you. <strong>You have total control:</strong></p>
+        <ul>
+            <li>To delete specific workflows, use the "Delete" option within the App Library.</li>
+            <li>To delete ALL app data, go to <strong>Settings > Apps > Gesture Flow > Storage > Clear Data</strong>.</li>
+            <li>Uninstalling the app will permanently delete all your locally stored workflows and settings.</li>
+        </ul>
+
+        <h2>7. Third-Party SDKs</h2>
+        <p>We use trusted libraries from Google to facilitate app features. These services may handle technical identifiers as per their own privacy policies:</p>
+        <ul>
+            <li><a href="https://www.google.com/policies/privacy/" target="_blank">Google Play Services</a></li>
+            <li><a href="https://support.google.com/admob/answer/6128543?hl=en" target="_blank">Google AdMob</a></li>
+            <li><a href="https://play.google.com/about/play-terms/index.html" target="_blank">Google Play Billing</a></li>
+        </ul>
+
+        <h2>8. Contact Us</h2>
+        <p>For any privacy-related inquiries or technical support, please contact us at:</p>
+        <p><strong>Email:</strong> 4soft2try@gmail.com</p>
+
+        <div class="footer">
+            <p>&copy; 2026 Gesture Flow Team. All rights reserved.</p>
+            <p>Built by <strong>Pankaj Kumar Rout</strong></p>
+            <p>Gesture Flow - Private & Professional Android Automation</p>
+        </div>
+    </div>
+</body>
+</html>

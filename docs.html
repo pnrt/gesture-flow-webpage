@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestureFlow | Master User Guide & UI Documentation</title>
+    <link rel="icon" type="image/png" href="new_hippo_web.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.15);
+            --accent: #7c3aed;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --bg-body: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border: #e2e8f0;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --nav-width: 300px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+        }
+
+        /* --- Sidebar --- */
+        aside {
+            width: var(--nav-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--bg-subtle);
+            border-right: 1px solid var(--border);
+            padding: 40px 24px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 48px;
+            letter-spacing: -1px;
+        }
+        .sidebar-logo img { width: 34px; height: 34px; }
+
+        aside ul { list-style: none; }
+        aside .nav-heading {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            font-weight: 800;
+            margin: 32px 0 12px 12px;
+        }
+        aside a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 16px;
+            display: block;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        aside a:hover { background: rgba(37, 99, 235, 0.08); color: var(--primary); }
+        aside a.active { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+
+        /* --- Main Content --- */
+        main {
+            margin-left: var(--nav-width);
+            flex: 1;
+            padding: 80px 100px;
+            max-width: 1200px;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 24px;
+            right: 40px;
+            z-index: 1000;
+            display: flex;
+            gap: 16px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        .btn-primary { background: var(--dark); color: var(--white); box-shadow: var(--shadow-sm); }
+        .btn-outline { border: 1px solid var(--border); color: var(--dark); background: rgba(255,255,255,0.8); backdrop-filter: blur(8px); }
+
+        section { margin-bottom: 140px; }
+        .badge {
+            background: var(--primary-glow);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+        h1 { font-size: 64px; font-weight: 800; letter-spacing: -3px; line-height: 1.1; margin-bottom: 32px; color: var(--dark); }
+        h2 { font-size: 36px; font-weight: 800; margin-top: 80px; margin-bottom: 32px; color: var(--dark); display: flex; align-items: center; gap: 12px; }
+        h2::before { content: ''; display: block; width: 4px; height: 32px; background: var(--primary); border-radius: 4px; }
+
+        h3 { font-size: 26px; font-weight: 700; margin-top: 48px; margin-bottom: 20px; color: var(--primary); }
+        h4 { font-size: 20px; font-weight: 700; margin-top: 32px; margin-bottom: 16px; color: var(--dark); }
+
+        p { margin-bottom: 1.5em; color: var(--text-main); font-size: 18px; }
+
+        .hero-box {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            margin-bottom: 64px;
+            box-shadow: var(--shadow-sm);
+        }
+        .hero-box p { font-size: 22px; font-weight: 500; color: var(--text-main); margin-bottom: 0; line-height: 1.4; }
+
+        ul, ol { margin-bottom: 1.5em; padding-left: 20px; list-style: none; }
+        li { margin-bottom: 12px; position: relative; padding-left: 24px; color: var(--text-main); font-size: 17px; }
+        li::before { content: '•'; color: var(--primary); font-weight: bold; position: absolute; left: 0; }
+
+        .ui-detail-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        .ui-detail-card h3 { margin-top: 0; }
+        .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; list-style: none; padding: 0; }
+        .feature-item {
+            background: var(--bg-subtle);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .feature-item:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-premium); }
+        .feature-item strong { display: block; font-size: 18px; margin-bottom: 8px; color: var(--dark); }
+        .feature-item span { font-size: 15px; color: var(--text-light); }
+
+        .tutorial-box {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin: 40px 0;
+        }
+        .tutorial-step { display: flex; gap: 24px; margin-bottom: 32px; }
+        .tutorial-step:last-child { margin-bottom: 0; }
+        .tutorial-number {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .node-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; margin-top: 40px; }
+        .node-item {
+            background: var(--bg-subtle);
+            padding: 32px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .node-item:hover { background: white; border-color: var(--primary); box-shadow: var(--shadow-premium); }
+        .node-item h4 { font-size: 20px; color: var(--primary); margin-bottom: 12px; }
+        .node-item p { font-size: 15px; margin-bottom: 24px; }
+        .config-tag-container { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px dashed var(--border); padding-top: 16px; }
+        .config-tag { background: white; padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 800; color: var(--text-light); border: 1px solid var(--border); text-transform: uppercase; }
+
+        .spec-table-container { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); margin: 32px 0; }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: white; }
+        th { background: var(--bg-subtle); padding: 16px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+        td { padding: 16px; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--text-main); }
+
+        .callout { padding: 32px; border-radius: var(--radius-md); margin: 48px 0; border-left: 6px solid; }
+        .tip-box { background: #f0fdf4; border-color: #22c55e; color: #166534; }
+        .tip-box strong { display: block; font-size: 22px; margin-bottom: 12px; }
+        .warning-box { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
+        .warning-box strong { display: block; font-size: 22px; margin-bottom: 12px; }
+
+        .code-snippet { background: var(--dark); color: #e2e8f0; padding: 24px; border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 15px; margin: 32px 0; position: relative; overflow-x: auto; }
+        .code-snippet::before { content: 'CODE VIEW'; position: absolute; top: 12px; right: 20px; font-size: 10px; font-weight: 800; opacity: 0.4; }
+
+        .glossary-item { margin-bottom: 32px; }
+        .glossary-term { font-weight: 800; color: var(--primary); font-size: 18px; display: block; margin-bottom: 4px; }
+
+        footer { margin-top: 120px; padding: 80px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 14px; background: var(--bg-subtle); }
+        .footer-logo { font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .footer-logo img { width: 32px; }
+
+        @media (max-width: 1024px) {
+            aside { display: none; }
+            main { margin-left: 0; padding: 100px 24px; }
+            h1 { font-size: 48px; }
+            .feature-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<aside>
+    <a href="index.html" class="sidebar-logo">
+        <img src="new_hippo_web.png" alt="GestureFlow Logo">
+        GestureFlow
+    </a>
+    <ul>
+        <li><a href="#welcome">Introduction</a></li>
+        <div class="nav-heading">The Foundation</div>
+        <li><a href="#setup">System Setup</a></li>
+        <li><a href="#battery">Battery Optimization</a></li>
+        <div class="nav-heading">Interface Navigation</div>
+        <li><a href="#ui-home">The Home Hub</a></li>
+        <li><a href="#ui-canvas">The Design Canvas</a></li>
+        <li><a href="#ui-record">The Smart Recorder</a></li>
+        <li><a href="#ui-settings-sec">Control Center</a></li>
+        <div class="nav-heading">Automation Logic</div>
+        <li><a href="#engine">Thinking Engine</a></li>
+        <li><a href="#logic">Branching Logic</a></li>
+        <li><a href="#nodes">The Node Library</a></li>
+        <li><a href="#variables">Memory & Variables</a></li>
+        <div class="nav-heading">Workflows</div>
+        <li><a href="#tutorial">Building a First Flow</a></li>
+        <li><a href="#sharing-sec">Sharing & JSON</a></li>
+        <li><a href="#best-practices">Pro Best Practices</a></li>
+        <div class="nav-heading">Support & Safety</div>
+        <li><a href="#privacy">Security & Privacy</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#glossary">Glossary</a></li>
+        <li><a href="#faq">FAQ</a></li>
+    </ul>
+</aside>
+
+<div class="top-nav">
+    <a href="index.html" class="btn btn-outline">Back to Home</a>
+    <a href="privacy_policy.html" class="btn btn-primary">Privacy Policy</a>
+</div>
+
+<main>
+    <section id="welcome">
+        <span class="badge">Documentation v1.2.0</span>
+        <h1>The definitive guide to Android automation.</h1>
+        <div class="hero-box">
+            <p>Welcome to the GestureFlow ecosystem. You are now equipped with a professional-grade visual programming engine that transforms how you interact with your mobile device. From here, anything you can imagine on a screen, you can automate with absolute precision.</p>
+        </div>
+        <p>GestureFlow was born from a simple need: to make the power of coding accessible to everyone through a visual medium. We've eliminated the syntax errors and replaced them with a robust node-based canvas. This manual is your blueprint to mastering the engine, the interface, and the logic of high-performance automation. We will cover everything from the basic taps to complex data-aware logical loops that can interact with external APIs and Bluetooth hardware. Whether you are a professional tester, a productivity enthusiast, or a hardware tinkerer, GestureFlow has the tools you need to excel.</p>
+
+        <h3>The Philosophy of Visual Flow</h3>
+        <p>Traditional coding is powerful but slow and hard to learn. Screen macro recorders are fast but "dumb"—they can't react to changes. GestureFlow combines the speed of visual building with the intelligence of conditional logic. If a button moves, the <strong>Anchor Tap</strong> finds it. If an app takes too long to load, the <strong>Condition</strong> waits for it. This is automation that thinks, reacts, and persists through app updates and device restarts. Our mission is to put the full power of Android into your hands, without the complexity of traditional development.</p>
+    </section>
+
+    <!-- SECTION: SETUP -->
+    <section id="setup">
+        <h2>Phase 1: High-Level System Setup</h2>
+        <p>Unlike standard apps, GestureFlow operates as a privileged system component. This allows it to work <em>globally</em>—meaning it can interact with your Gmail, your favorite game, or your system settings with identical precision. This power requires two foundational "handshakes" with the Android OS. These permissions are strictly managed and do not involve any cloud-based data extraction or external reporting.</p>
+
+        <div class="tutorial-box">
+            <h3>Standard Onboarding Sequence</h3>
+
+            <div class="tutorial-step">
+                <div class="tutorial-number">1</div>
+                <div>
+                    <strong>Accessibility Service (The Core):</strong> This is the most critical permission. It grants the engine a "Virtual Hand" to perform gestures and a "Virtual Eye" to read screen text.
+                    <ul>
+                        <li>Open your phone's <strong>Settings</strong> app.</li>
+                        <li>Search for <strong>Accessibility</strong> in the search bar.</li>
+                        <li>Tap on <strong>Downloaded Apps</strong> (or <em>Installed Services</em> on older devices).</li>
+                        <li>Select <strong>GestureFlow</strong> and toggle the switch to <strong>Enable</strong>.</li>
+                        <li><em>Security Note:</em> Android will show a standard warning. GestureFlow is designed with a "Local-Only" policy—it never uploads your screen data. All processing happens on-device and in real-time volatile memory.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tutorial-step">
+                <div class="tutorial-number">2</div>
+                <div>
+                    <strong>Overlay Permission (The Layer):</strong> This is required for the application to "draw" its floating recording tools and status indicators on top of other apps. Without this, the recording bubble and the crosshair cannot function.
+                    <ul>
+                        <li>Go to <strong>Settings</strong> > <strong>Apps</strong>.</li>
+                        <li>Find <strong>Special App Access</strong> (usually in the advanced menu or three-dot menu).</li>
+                        <li>Select <strong>Display over other apps</strong>.</li>
+                        <li>Locate <strong>GestureFlow</strong> in the list and grant the permission.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tutorial-step">
+                <div class="tutorial-number">3</div>
+                <div>
+                    <strong>Notification Service:</strong> To keep you informed about long-running workflows or logic results, GestureFlow uses the system notification tray.
+                    <p>When you add your first <strong>Notification Node</strong>, the app will request access. Tap "Allow" to ensure status updates reach you even when the screen is locked. This is essential for workflows that run for several minutes or hours (like social media scroll-bots or web scrapers) to alert you upon completion or error.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: BATTERY -->
+    <section id="battery">
+        <h2>Phase 2: Achieving 100% Reliability</h2>
+        <p>The number one reason for automation failure on Android is "Battery Optimization." Android's system is designed to save power by killing apps it thinks are "idle." To the system, a background automation tool often looks idle, even when it's working hard to process logic every second. To achieve professional-grade stability, we must "harden" the app against these background killers.</p>
+
+        <div class="callout warning-box">
+            <strong>⚠️ Mandatory Configuration</strong>
+            <p>To ensure your workflows don't stop mid-way or skip nodes, you MUST exclude GestureFlow from battery restrictions. This ensures the Accessibility Service remains "Alive" and responsive in the background at all times.</p>
+            <ol>
+                <li>Long press the <strong>GestureFlow</strong> icon on your launcher home screen.</li>
+                <li>Select <strong>App Info</strong> (usually indicated by an 'i' icon).</li>
+                <li>Go to <strong>Battery</strong> (or <em>Battery Usage</em>).</li>
+                <li>Select the <strong>"Unrestricted"</strong> (or <em>No Restrictions</em>) option. If you only see an "Optimize" toggle, ensure it is turned OFF.</li>
+            </ol>
+        </div>
+
+        <h3>Manufacturer-Specific Hardening Paths</h3>
+        <p>Different phone brands have different "aggressive" cleaners and process managers. Follow these specific paths for your brand to ensure enterprise-grade stability. Failure to do this will result in the service being disconnected randomly by the OS.</p>
+
+        <div class="spec-table-container">
+            <table>
+                <thead>
+                    <tr><th>Manufacturer</th><th>The "Secret" Setting & Path</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Samsung (OneUI)</strong></td>
+                        <td>Settings > Battery > Background usage limits > <strong>Never auto-sleeping apps</strong>. Add GestureFlow here. Also, turn off <em>Auto-restart at set times</em> in the Device Care > System Maintenance menu to prevent nightly reboots from killing your service.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Xiaomi / Redmi / Poco</strong></td>
+                        <td>App Info > Battery Saver > <strong>No Restrictions</strong>. Crucially, also toggle <strong>Autostart</strong> to ON in the App Info menu. Enable 'Display pop-up windows while running in the background' to ensure the recorder bubble works perfectly.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OnePlus / Oppo / Realme</strong></td>
+                        <td>Settings > Apps > GestureFlow > Battery > <strong>Allow background activity</strong> AND <strong>Allow auto-launch</strong>. Ensure "App Management" doesn't "Optimize" the app under the Battery settings, which can freeze the engine logic.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vivo / iQOO</strong></td>
+                        <td>Settings > Battery > High background power consumption > Toggle ON for GestureFlow. Also, set 'Background power consumption' to 'Don't restrict' in the individual app settings.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Huawei / Honor</strong></td>
+                        <td>Settings > Battery > App Launch > Manual Manage > Enable 'Auto-launch', 'Secondary launch', and 'Run in background' for GestureFlow.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Pixel</strong></td>
+                        <td>Settings > Apps > See all apps > GestureFlow > Battery > <strong>Unrestricted</strong>. Pixel devices are generally the most stable once this single setting is changed.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- SECTION: UI HOME -->
+    <section id="ui-home">
+        <h2>The Home Hub: Command & Control Center</h2>
+        <p>The Home Hub is your command center. It provides an immediate overview of your system's health and your library of automation pipelines. It's designed to be clean yet information-dense, allowing for rapid management of dozens of workflows without cognitive overload.</p>
+
+        <div class="ui-detail-card">
+            <h3>Interface Component Breakdown</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>Global Status Card (Header)</strong>
+                    <span>Located at the very top. A pulsing green <strong>bolt icon</strong> with "System Active" means the engine is connected and ready. A red <strong>warning icon</strong> with "Setup Required" acts as a shortcut—tap it to go directly to the setting that needs fixing. It also detects if your device's overlay permission is missing.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>The "Running Now" Monitor</strong>
+                    <span>This section only appears when a workflow is active. It shows the workflow name, a real-time progress indicator, and the current <strong>Step ID</strong> being executed. Use the <strong>Stop All</strong> button to immediately terminate all active threads if a workflow gets stuck in a logic loop.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Activity Stream (Live Logs)</strong>
+                    <span>Shows the last 3 results from your logic engine. If a node used an <strong>API</strong> or performed a <strong>Bluetooth</strong> command, the raw response, device name, or status will be logged here for quick reference without needing to open the canvas. Excellent for verifying data extraction.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Smart Library Search & Filter</strong>
+                    <span>As you build dozens of workflows, finding them is easy. The search bar at the top of the workflow list uses "Fuzzy Matching"—search for "login" to find "Daily Login" or "App_Login_Script." It searches through names and internal node descriptions.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Workflow Visualization Icons</strong>
+                    <span>Each card in your library features a unique, procedurally generated "Network Map" icon. The nodes and lines in this icon reflect the actual structure of your workflow, helping you recognize complex flows visually without reading labels.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Import/Export Utility</strong>
+                    <span>The floating folder icon allows you to paste JSON code from your clipboard to instantly recreate a workflow shared by someone else. You can also share your own by tapping "Share" in the card's menu, which generates a .json file for any file provider.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CANVAS -->
+    <section id="ui-canvas">
+        <h2>The Design Canvas: Visual Logic Workspace</h2>
+        <p>The Canvas is where "Drawing" meets "Programming." It is a 2D infinite workspace where you define the sequence of events that make up your pipeline. It uses a custom-built, hardware-accelerated rendering engine for smooth performance even with 100+ nodes and complex branching paths.</p>
+
+        <h3>Navigating the Infinite Workspace</h3>
+        <ul>
+            <li><strong>Panning (Moving):</strong> Use <strong>two fingers</strong> to drag the canvas in any direction. This allows you to follow long logical chains or move between different "clusters" of logic. Single-finger drag is reserved for moving individual nodes.</li>
+            <li><strong>Zooming:</strong> Use the standard "pinch" gesture. Zoom out to see your whole architecture (0.2x) or zoom in to see specific node parameters and precise coordinate labels (3.0x). The engine handles auto-scaling of text for readability.</li>
+            <li><strong>The "Fit to Content" Control:</strong> Tapping the center-focus icon at the bottom left will automatically calculate the best zoom level and translation to show every node on your screen at once. Essential for cleaning up "spaghetti" logic.</li>
+            <li><strong>Canvas Locking:</strong> Tap the lock icon to freeze pan/zoom. This is highly recommended when you are drawing connections (edges) between nodes to avoid the canvas slipping while you aim for the ports.</li>
+        </ul>
+
+        <h3>The Handle & Connection (Port) System</h3>
+        <p>Connecting nodes is how you define "What happens next." This is done through <strong>Handles</strong>—the circular ports on the sides of nodes. Execution always flows from right to left (out to in).</p>
+
+        <div class="ui-detail-card">
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>THEN Handle (Blue Port)</strong>
+                    <span>The standard exit path. If a node completes (e.g., a Tap is performed), the engine follows this blue line to the next node. For conditions, this is the "True" path where text was found. This handle is located at the top-right of nodes.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>ELSE Handle (Red Port)</strong>
+                    <span>Found only on <strong>Logical nodes</strong> (Condition, Bluetooth Wait). This path is taken if the condition fails or times out. It is the secret to building "Smart" automation that retries, scrolls, or branches into different menus based on UI state.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Incoming Port (White Circle)</strong>
+                    <span>Located on the left of every node. This is the "landing zone" for connections. Drop your dragged handle here to lock the link. A node can have unlimited incoming links but only one of each outgoing type.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Edge Deletion & Selection</strong>
+                    <span>Tap on any existing connection line. A red "X" bubble will appear in the middle of the line—tap it to delete the connection. The line will also turn black to show it is currently selected. The engine uses smart routing to avoid node bodies.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout tip-box">
+            <strong>💡 Start Node (#0):</strong> Look for the node with the pulsing green indicator. This is the root of your pipeline. You can change its type to anything (Tap, Delay, etc.), but it can never be deleted. Every workflow execution begins here. If you accidentally disconnect it, the workflow will stop immediately after Node #0 executes.
+        </div>
+    </section>
+
+    <!-- SECTION: RECORDER -->
+    <section id="ui-record">
+        <h2>The Smart Recorder: High-Fidelity Capture</h2>
+        <p>Entering X and Y coordinates manually is tedious and prone to error. The Smart Recorder allows you to "Train" the engine by simply using your phone as you normally would. It translates your physical touches and scrolls into digital instructions at the pixel level in real-time.</p>
+
+        <div class="tutorial-box">
+            <h4>Workflow Recording Masterclass</h4>
+            <div class="tutorial-step">
+                <div class="tutorial-number">1</div>
+                <div><strong>Metadata Initialization:</strong> Give your recording a descriptive name (e.g., "Social Media Like-Bot") and tap <strong>Start Overlay</strong>. The main app will minmize to the background to free up your screen.</div>
+            </div>
+            <div class="tutorial-step">
+                <div class="tutorial-number">2</div>
+                <div><strong>The Remote Bubble:</strong> A floating bubble with a "Record" icon will appear. Drag it to any corner so it doesn't block your UI targets. This bubble is your remote control for the entire capture session.</div>
+            </div>
+            <div class="tutorial-step">
+                <div class="tutorial-number">3</div>
+                <div><strong>Active Capture Mode:</strong> Tap the bubble and click the <strong>Red Circle</strong>. Now, every tap, swipe, and scroll you perform on <em>any application</em> is being logged by the Accessibility Service. The bubble will pulse red to show it's active.</div>
+            </div>
+            <div class="tutorial-step">
+                <div class="tutorial-number">4</div>
+                <div><strong>Review & Cleanup:</strong> Tap the bubble again and click <strong>Stop</strong> (Square). Re-open GestureFlow. You will see a list of "Captured Steps" with their exact pixel coordinates and action types. You can swipe to delete mistakes here before saving.</div>
+            </div>
+            <div class="tutorial-step">
+                <div class="tutorial-number">5</div>
+                <div><strong>Instant Conversion:</strong> Tap <strong>Save Workflow</strong>. The app will automatically generate a pipeline on the Canvas, connecting every recorded step in perfect chronological order with calculated delays based on your real-world speed.</div>
+            </div>
+        </div>
+
+        <h3>Bubble UI Controls Detailed</h3>
+        <div class="ui-detail-card">
+            <div class="feature-list">
+                <div class="feature-item"><strong>Record (Circle Icon):</strong> Starts capturing gestures. All UI elements behind the bubble become "transparent" to touch during this mode, allowing you to click buttons directly through the record zone for pixel accuracy.</div>
+                <div class="feature-item"><strong>Stop (Square Icon):</strong> Ends the capture session and stores the data in temporary cache. The bubble will minimize back into its idle state, and the main app will regain focus for your review.</div>
+                <div class="feature-item"><strong>Move (Crosshair Icon):</strong> Drag the crosshair to move the bubble. This is essential if you need to tap a UI element that is currently underneath the bubble's default position.</div>
+                <div class="feature-item"><strong>Dismiss (X Icon):</strong> Close the overlay immediately without saving. All unsaved captured steps will be lost permanently. Use this if you made a huge mistake and want to restart from scratch.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: SETTINGS -->
+    <section id="ui-settings-sec">
+        <h2>The Control Center: System Configuration</h2>
+        <p>The Settings screen is where you manage the relationship between GestureFlow and your device. It's the "Under the hood" area of the app, ensuring the core engine remains stable, efficient, and personalized to your tastes.</p>
+
+        <div class="ui-detail-card">
+            <h3>Customization & Management</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>Premium Tier Management:</strong>
+                    <span>One-tap upgrade to remove all advertisements and support the independent development of this engine. A green checkmark appears once your purchase is validated. Ad removal applies globally across the app and unlocks priority execution for background tasks.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Accessibility Manager Link:</strong>
+                    <span>A direct deep-link to your system's Accessibility settings. If your workflows stop working, check here first to ensure the service hasn't been "Hibernated" or disabled by an OS update. Android often disables it if the app isn't opened for 30 days.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Peeking Logo Customization:</strong>
+                    <span>An aesthetic feature that places a tiny, semi-transparent app logo at the very bottom of your screen during idle times, giving your phone a custom, high-tech "Automation" look. You can toggle this ON/OFF instantly.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Community Hub & Sharing:</strong>
+                    <span>Links to rate the app on the Play Store, share your workflow JSONs with friends, and view the current stable version number. Professional users can also find developer contact info and bug reporting forms here.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: ENGINE -->
+    <section id="engine">
+        <h2>How the Logic Engine Thinks</h2>
+        <p>GestureFlow doesn't just "play back" coordinates like a simple macro recorder. It uses a <strong>Reactive Execution Model</strong> that adapts to your phone's performance and UI state. This ensures that even if an app loads slightly slower today, your workflow remains robust and reliable.</p>
+
+        <div class="spec-table-container">
+            <table>
+                <thead>
+                    <tr><th>Execution Phase</th><th>What the Engine is doing at the System Level</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Snapshot Compilation</strong></td>
+                        <td>The engine converts your visual nodes into a logical map. It identifies "Dead Ends" (nodes without connections) and prepares the memory map for runtime variables. It also checks for syntax errors in your variable tags (like missing closing braces).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Instruction Dispatch</strong></td>
+                        <td>It sends a command to the system (e.g., "Tap at 500, 1000"). It waits for the <em>Duration</em> you set in the config before moving on. This duration acts as the "Hold" time for taps. Higher hold times can trigger "Context Menus" in some apps.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Inter-Step Sync</strong></td>
+                        <td>There is a mandatory <strong>300ms delay</strong> between every node. This ensures the Android OS has processed the previous tap and updated its internal state before the next command. This prevents "Input Lag" issues and skipped buttons.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Semantic UI Evaluation</strong></td>
+                        <td>If it hits a <strong>Condition</strong>, it "scans" the whole screen. It looks at the text labels of every button, menu, and text view simultaneously using the Accessibility "Eye". This scan happens thousands of times per second until a match is found or timeout reached.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Infinite Loop Protection</strong></td>
+                        <td>If your logic creates an infinite loop (A &rarr; B &rarr; A), the engine will automatically shut down after 500 visits to a single node to protect your battery and prevent system freezes. You will see a "Cycle Detected" error in the activity log.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- SECTION: LOGIC -->
+    <section id="logic">
+        <h2>Branching Logic: SUCCESS vs. ELSE</h2>
+        <p>The "Else" handle (Red Port) is what makes GestureFlow powerful. It allows you to build workflows that don't just fail when something goes wrong—they adapt and react. This is how you build "Human-like" intelligence into your device automation.</p>
+
+        <h4>Advanced Looping Pattern: The Smart Waiter</h4>
+        <p>The most common logic pattern is the <strong>Retry Loop</strong>. This is essential for apps that have inconsistent loading times or network-dependent UI. It eliminates the need for long, hard-coded delays.</p>
+        <div class="code-snippet">
+            [Condition: Look for "Dashboard"]
+            -- (Found) --> [Tap: Profile]
+            -- (Not Found) --> [Delay: 2000ms] --> [Back to Condition]
+        </div>
+        <p>In this pattern, the workflow will patiently wait for the "Dashboard" text to appear, checking every two seconds, and only proceeding once the UI is actually ready. This is significantly more reliable than a fixed 10-second wait, as it proceeds the <em>instant</em> the app is ready.</p>
+    </section>
+
+    <!-- SECTION: NODES -->
+    <section id="nodes">
+        <h2>The Definitive Node Library</h2>
+        <p>Each node in GestureFlow is a specialized instruction. Mastery of these nodes is the key to building high-performance automation. We've grouped them by function to help you choose the right tool for the job. Every node is editable at any time via the "Config" button.</p>
+
+        <div class="node-grid">
+            <div class="node-item">
+                <h4>Tap / Touch</h4>
+                <p>Simulates a physical finger press. Coordinate (0,0) is top-left. Duration controls how long the finger stays on the glass. Use 50ms for a quick tap, and 600ms for a long-press. Perfect for buttons, icons, and list items.</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">X/Y Pixels</span>
+                    <span class="config-tag">Hold Duration</span>
+                    <span class="config-tag">Immediate Execution</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>Swipe / Scroll</h4>
+                <p>Simulates a sliding motion between two points. Useful for scrolling Instagram feeds, dismissing cards, or unlocking screens. Duration determines speed—lower is faster (e.g., 200ms for a flick, 1500ms for a slow drag).</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">Start/End X & Y</span>
+                    <span class="config-tag">Duration (Speed)</span>
+                    <span class="config-tag">Scroll Directionality</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>Condition (Search)</h4>
+                <p>The primary decision-maker. It searches the entire UI hierarchy for your specific text string. It is highly efficient and works even if the text is partially obscured by another app or a floating system menu.</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">Query Text</span>
+                    <span class="config-tag">Search Timeout</span>
+                    <span class="config-tag">Fuzzy Match Logic</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>Anchor Tap</h4>
+                <p>A "Semantic" tap. Instead of hard-coded coordinates, it finds a word (e.g., "Submit") and clicks exactly where that word is currently located. This is the most reliable way to tap buttons that move during app updates or different screen sizes.</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">Search Text</span>
+                    <span class="config-tag">X/Y Offset</span>
+                    <span class="config-tag">Auto-Center Target</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>Read Text (Scraper)</h4>
+                <p>Extracts data from the screen. If you tell it to read "Price:", it will capture the value displayed next to that label and save it to a variable for use in later logic, notifications, or API calls. Essential for web scraping or data monitoring.</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">Target Label</span>
+                    <span class="config-tag">Variable Name</span>
+                    <span class="config-tag">Capture Area Bounds</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>API (Network)</h4>
+                <p>Connects your phone to external web services. You can trigger webhooks (IFTTT/Zapier), send data to a cloud database, or get live information. Supports JSON, XML, and raw text responses. Variables can be injected into the URL or Body.</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">URL</span>
+                    <span class="config-tag">GET/POST/PUT</span>
+                    <span class="config-tag">Response Variable</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>Bluetooth (BLE/SPP)</h4>
+                <p>Communicate with hardware (Arduino, ESP32, IoT devices). Create workflows that are triggered by physical sensors (like a smart doorbell) or send commands to external hardware (like turning on a desk lamp or opening a smart lock).</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">Device Name Filter</span>
+                    <span class="config-tag">Command Text</span>
+                    <span class="config-tag">Baud Rate (SPP Mode)</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>Delay / Pause</h4>
+                <p>Halts the workflow for a set amount of time. Crucial for syncing with external apps that have slow animations or for creating "human-like" delays to avoid bot detection systems in social apps. Use this frequently for better reliability.</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">Wait Time (ms)</span>
+                    <span class="config-tag">Random Jitter Range</span>
+                </div>
+            </div>
+            <div class="node-item">
+                <h4>Output Log</h4>
+                <p>Prints custom text to the Home Hub's activity log. Essential for debugging variable values during workflow development. You can see the actual data captured by a Read Text node here for verification.</p>
+                <div class="config-tag-container">
+                    <span class="config-tag">Message Template</span>
+                    <span class="config-tag">Log Severity Level</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: VARIABLES -->
+    <section id="variables">
+        <h2>Memory & Dynamic Variables</h2>
+        <p>Variables are the "short-term memory" of your workflow. They allow data to flow dynamically from one node to another. All variables are case-sensitive and exist only while the specific workflow is running. This prevents data from one workflow from leaking into another, ensuring enterprise-grade data isolation and security.</p>
+
+        <h3>Storing Data Points</h3>
+        <p>Data is stored using <strong>Read Text</strong>, <strong>API</strong>, or <strong>Bluetooth Receive</strong> nodes. You assign a name, like <code>current_user</code>. We recommend using <code>snake_case</code> for clarity and to avoid conflicts with system labels. Variables can store numbers, text, or even whole JSON objects from APIs.</p>
+
+        <h3>The Variable Tag Syntax: <code>${name}</code></h3>
+        <p>To use a stored value in any text field (like a Notification message, an API URL, or a Search Text), wrap the variable name in curly braces and a dollar sign. The engine will look up the value at the exact microsecond that node is reached.</p>
+
+        <div class="code-snippet">
+            // Example of String Interpolation:
+            If variable 'status' contains "Success", your Notification node can say:
+            "Task finished with status: ${status}"
+
+            // Example in API URL:
+            https://api.test.com/get_user?id=${user_id}
+        </div>
+
+        <div class="callout warning-box">
+            <strong>⚠️ Variable Fallback Logic:</strong> If you use a variable that hasn't been set yet (e.g. <code>${missing_val}</code>), the engine will output the literal text <code>"${missing_val}"</code>. Always ensure your "Read Text" nodes happen <em>before</em> you use the variable in the logical sequence. Check your activity log to see variable assignments in real-time.
+        </div>
+    </section>
+
+    <!-- SECTION: TUTORIAL -->
+    <section id="tutorial">
+        <h2>Step-by-Step Tutorial: Your First Workflow</h2>
+        <p>Let's build a simple flow that searches for "GestureFlow" on Google and alerts you when the results appear. This tutorial will teach you the fundamentals of Taps, Delays, and Notifications. Have your browser open on your phone's home screen before starting this guide.</p>
+
+        <div class="tutorial-box">
+            <div class="tutorial-step">
+                <div class="tutorial-number">1</div>
+                <div><strong>Node #0 (Tap):</strong> Open your browser. Tap the FAB (+), select "Tap". Tap "Config" on the new node. Point this to the Google Search bar coordinates on your screen. Set duration to 100ms. Tap <strong>Save</strong>.</div>
+            </div>
+            <div class="tutorial-step">
+                <div class="tutorial-number">2</div>
+                <div><strong>Node #1 (Delay):</strong> We need to wait for the keyboard to appear. Add a "Delay" node from the library. Set it to 1200ms. This ensures the app is ready for text input before the engine tries to continue.</div>
+            </div>
+            <div class="tutorial-step">
+                <div class="tutorial-number">3</div>
+                <div><strong>Node #2 (Notification):</strong> Give yourself a status update. Add a "Notification" node. Set the Title to "Search Start" and Message to "Initiating Google search...". This helps you know the engine is working in the background.</div>
+            </div>
+            <div class="tutorial-step">
+                <div class="tutorial-number">4</div>
+                <div><strong>The Final Link:</strong> Connect the nodes visually. Drag the blue handle from #0 to #1, and from #1 to #2. Click the big green <strong>Play</strong> button in the top bar. Sit back and watch your phone work on its own!</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: SHARING -->
+    <section id="sharing-sec">
+        <h2>Sharing & JSON Persistence</h2>
+        <p>GestureFlow allows you to export your entire workflow logic as a JSON string. This enables easy backups, version control, and community sharing. No binary data is used, ensuring the code is human-readable and safe.</p>
+
+        <h3>How to Export</h3>
+        <p>Tap the triple-dot menu on any workflow card in the Home Hub or the menu icon inside the Canvas. Select <strong>Share Workflow</strong>. A system sharing dialog will appear, providing a .json file or plain text string containing every node position, connection, and setting.</p>
+
+        <h3>How to Import</h3>
+        <p>Tap the floating "Folder" icon on the Home Hub. Paste the JSON string shared with you. The engine will instantly validate the structure and recreate the entire pipeline. Note: imported workflows will have "(Imported)" added to their name to avoid duplicates.</p>
+    </section>
+
+    <!-- SECTION: BEST PRACTICES -->
+    <section id="best-practices">
+        <h2>Pro Best Practices for Automation</h2>
+        <p>Follow these rules used by professional automation architects to ensure 100% success rates even on low-end devices, varying network conditions, or different screen sizes. Stability is the most important part of automation.</p>
+
+        <div class="ui-detail-card">
+            <div class="feature-list">
+                <div class="feature-item">
+                    <strong>The Animation Buffer Rule</strong>
+                    <span>Modern apps use animations (fade-in, slide-up, shared element transitions) that take about 300-500ms. If you tap during the animation, the app will ignore the touch. <strong>Always add a 500ms Delay</strong> after any click that changes the screen state. This is the #1 fix for "skipped" steps.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Anchor > Coordinate Rule</strong>
+                    <span>Pixel coordinates change if you rotate your screen or change phone models. **Anchor Taps** work by finding text labels, making your workflows "Resolution Independent." Always use them if you plan to share your workflow JSON with the community or use it on multiple devices.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Smart Wait-Then-Act Pattern</strong>
+                    <span>Instead of guessing how long a page takes to load (which varies on Wi-Fi vs LTE), use a **Condition Node** searching for a unique word on the new page. Connect the Success handle to your next action. This is the most robust method for any automation.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Descriptive Pipeline Labeling</strong>
+                    <span>Rename your pipelines clearly. Instead of "Workflow_1," use "Daily_Expense_Uploader". This makes the Activity Log on the Home screen much easier to read and debug. You can rename a flow by tapping its title at the top of the Canvas.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: PRIVACY -->
+    <section id="privacy">
+        <h2>Security, Privacy & Data Boundaries</h2>
+        <p>Because GestureFlow uses the Accessibility API, we hold ourselves to the highest possible security standards. We operate on a **Zero-Leak, Local-Only** architecture. Your security is our primary design constraint, and we build everything with "Privacy-by-Default". We do not even require an account or email to use the app.</p>
+
+        <div class="callout tip-box">
+            <strong>🔒 The "Zero-Leak" Policy:</strong> We do not have a server. We do not have a cloud. We do not have a database outside your phone. Your data is literally impossible for us to see, even if we wanted to. We never request the "Internet" permission except for YOUR API nodes.
+        </div>
+
+        <h3>The Data Boundary Map</h3>
+        <ul>
+            <li><strong>Screen Data Processing:</strong> The engine "looks" at your screen ONLY when a workflow is active or you are recording. This data is processed in volatile memory (RAM) and is wiped the microsecond the logical check is complete. It is never saved to a log or a permanent file. We do not record video of your screen.</li>
+            <li><strong>Workflow Data Storage:</strong> Your nodes, logic, and variables are stored in a private, encrypted database on your device (<code>/data/user/0/com.pankajkumarrout.gestureflow/databases/</code>). This folder is inaccessible to other apps on your phone even if they have broad storage permissions.</li>
+            <li><strong>Third-Party Tracking:</strong> GestureFlow contains NO analytics SDKs (no Firebase, no Mixpanel, no Adjust, no Facebook SDK). We do not track your device ID, your IP address, or your automation habits. We value your anonymity as much as you do. We don't even use Crashlytics.</li>
+            <li><strong>Network Transparency:</strong> The app only uses the Internet if YOU explicitly create an <strong>API Node</strong>. You have full control over where data is sent, what payload is transmitted, and what headers are used. Your tokens are your own.</li>
+        </ul>
+    </section>
+
+    <!-- SECTION: TROUBLESHOOTING -->
+    <section id="troubleshooting">
+        <h2>The Ultimate Troubleshooting Guide</h2>
+        <p>If your automation is stuck or behaving erratically, check these common "gotchas" before reaching out for support. 99% of issues are related to system configuration rather than engine errors.</p>
+
+        <div class="spec-table-container">
+            <table>
+                <thead>
+                    <tr><th>Issue Observed</th><th>Likely Root Cause</th><th>Proven Solution</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Taps miss the target button</strong></td>
+                        <td>Display scaling or font size too large. Device rotation.</td>
+                        <td>Reset Android Display settings to default or use <strong>Anchor Taps</strong>. Ensure the target app is in the same orientation as when recorded.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Workflow stops mid-run without error</strong></td>
+                        <td>Android battery optimization killing background service. Device auto-lock.</td>
+                        <td>Set app to <strong>"Unrestricted"</strong> in App Info > Battery. Keep the screen ON during execution.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conditions never match (False)</strong></td>
+                        <td>Case sensitivity or hidden zero-width spaces. Timeout too short.</td>
+                        <td>Double check exact text. "Login" is not the same as "LOGIN". Increase Wait Time to 5000ms if network is slow.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API calls fail (Red Path)</strong></td>
+                        <td>Invalid URL or network timeout. Missing HTTPS protocol.</td>
+                        <td>Ensure URL starts with <code>https://</code>. Increase node duration to 5000ms. Check if the server requires a specific User-Agent header.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>"Cycle Detected" Termination</strong></td>
+                        <td>Infinite loop in your logic connections.</td>
+                        <td>Check your Red/Blue lines. Ensure you aren't looping indefinitely without an exit condition. Check for recursive loops.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- SECTION: GLOSSARY -->
+    <section id="glossary">
+        <h2>Glossary of Core Terms</h2>
+        <div class="glossary-item">
+            <span class="glossary-term">Pipeline / Workflow</span>
+            <p>The container for your automation logic. A pipeline consists of multiple nodes connected together to perform a complete task (e.g., "Auto-check weather and alert"). You can have unlimited pipelines in your personal library. Pipelines can be shared as JSON.</p>
+        </div>
+        <div class="glossary-item">
+            <span class="glossary-term">Node</span>
+            <p>A single building block of logic (e.g., a Tap, a Delay, or an API call). Each node performs exactly one task and has its own configuration parameters. Nodes can be dragged and rearranged freely on the infinite canvas.</p>
+        </div>
+        <div class="glossary-item">
+            <span class="glossary-term">Edge / Connection</span>
+            <p>The line connecting two nodes, representing the flow of execution. Blue lines represent SUCCESS; Red lines represent ELSE/FAILURE paths. The flow direction is indicated by the line's origin handle.</p>
+        </div>
+        <div class="glossary-item">
+            <span class="glossary-term">Accessibility Service</span>
+            <p>The core Android component that allows GestureFlow to interact with other apps. It must be manually enabled in your phone's security settings for any automation to function. It acts as the "Brain" and "Hands" of the app.</p>
+        </div>
+        <div class="glossary-item">
+            <span class="glossary-term">Interpolation</span>
+            <p>The process of injecting a variable's value into a text field using the <code>${name}</code> syntax at runtime. E.g. "Price is ${price}" becomes "Price is $5.00" when processed by the engine.</p>
+        </div>
+        <div class="glossary-item">
+            <span class="glossary-term">Anchor</span>
+            <p>A text-based landmark on the screen used as a reference point for clicking or reading data. Anchors make workflows work across different phone models regardless of pixel density.</p>
+        </div>
+    </section>
+
+    <!-- SECTION: FAQ -->
+    <section id="faq">
+        <h2>FAQ (Frequently Asked Questions)</h2>
+        <h4>Can I automate Instagram, TikTok, or WhatsApp?</h4>
+        <p>Yes. GestureFlow works on any app that uses standard Android UI components. You can automate liking, scrolling, and even sending messages. However, be aware that many social apps have bot detection that might flag repetitive identical gestures if you don't add random delays (jitter) between actions. We recommend keeping flows "human-like."</p>
+
+        <h4>Is this app a virus? My phone gave a warning.</h4>
+        <p>No. Android gives a standard "Strong Warning" to <em>all</em> apps that request Accessibility Services because those services are very powerful. GestureFlow is safe because it is local-only and has no cloud component to leak your data. You can verify this in the app's permission settings and by using any network monitor tool.</p>
+
+        <h4>Can I share my workflows with friends?</h4>
+        <p>Absolutely. Use the <strong>Export</strong> feature on the canvas to get a JSON string. Your friends can then use the <strong>Import</strong> icon on the Home Hub to paste your code. This is the fastest way to collaborate on complex scripts and build a community library of automation. We encourage sharing on GitHub!</p>
+
+        <h4>Does it work with the screen off?</h4>
+        <p>No. For security reasons, Android requires an active UI session for gestures to be performed. The screen must be ON and the device UNLOCKED for the engine to simulate human touch. You can use the "Keep Screen On" settings or developer options to help with long runs.</p>
+
+        <h4>What is the "500 visit" limit?</h4>
+        <p>This is a safety circuit breaker. If the engine detects it has visited the same node 500 times in a single execution session, it assumes you've created an infinite loop by mistake and kills the workflow to save your battery from draining completely and to prevent system overheating.</p>
+    </section>
+
+    <footer>
+        <div class="footer-logo">
+            <img src="new_hippo_web.png" alt="Hippo Logo">
+            GestureFlow
+        </div>
+        <p>&copy; 2026 GestureFlow Automation Systems. Built by <strong>Pankaj Kumar Rout</strong>.</p>
+        <p>Private • Professional • Native Speed Build v1.2.0</p>
+    </footer>
+</main>
+
+<script>
+    const links = document.querySelectorAll('aside a');
+    const sections = document.querySelectorAll('section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        links.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
