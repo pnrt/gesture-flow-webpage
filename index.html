@@ -73,12 +73,16 @@
             padding: 0 32px;
             z-index: 1000;
             box-shadow: var(--shadow-sm);
+            transition: transform 0.35s ease, top 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+            will-change: transform;
         }
         .logo { font-size: 22px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 12px; text-decoration: none; letter-spacing: -1px; }
         .logo img { width: 38px; height: 38px; object-fit: contain; }
         .nav-links { display: flex; gap: 32px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 14px; transition: color 0.2s; }
         .nav-links a:hover { color: var(--dark); }
+        nav.nav-hidden { transform: translate(-50%, -120%); }
+        nav.nav-scrolled { background: rgba(255, 255, 255, 0.92); box-shadow: var(--shadow-premium); }
 
         /* --- Hero --- */
         .hero {
@@ -449,5 +453,19 @@
         </div>
     </footer>
 
+
+<script>
+    const siteNav = document.querySelector('nav');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const isScrollingDown = currentScrollY > lastScrollY;
+
+        siteNav.classList.toggle('nav-scrolled', currentScrollY > 12);
+        siteNav.classList.toggle('nav-hidden', isScrollingDown && currentScrollY > 120);
+        lastScrollY = currentScrollY;
+    }, { passive: true });
+</script>
 </body>
 </html>
