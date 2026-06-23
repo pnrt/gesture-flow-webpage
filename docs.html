@@ -289,7 +289,7 @@
         <p>GestureFlow was born from a simple need: to make the power of coding accessible to everyone through a visual medium. We've eliminated the syntax errors and replaced them with a robust node-based canvas. This manual is your blueprint to mastering the engine, the interface, and the logic of high-performance automation. We will cover everything from the basic taps to complex data-aware logical loops that can interact with external APIs and Bluetooth hardware. Whether you are a professional tester, a productivity enthusiast, or a hardware tinkerer, GestureFlow has the tools you need to excel.</p>
 
         <h3>The Philosophy of Visual Flow</h3>
-        <p>Traditional coding is powerful but slow and hard to learn. Screen macro recorders are fast but "dumb"—they can't react to changes. GestureFlow combines the speed of visual building with the intelligence of conditional logic. If a button moves, the <strong>Anchor Tap</strong> finds it. If an app takes too long to load, the <strong>Condition</strong> waits for it. This is automation that thinks, reacts, and persists through app updates and device restarts. Our mission is to put the full power of Android into your hands, without the complexity of traditional development.</p>
+        <p>Traditional coding is powerful but slow and hard to learn. Screen macro recorders are fast but "dumb"&mdash;they can't react to changes. GestureFlow combines the speed of visual building with the intelligence of conditional logic. If data comes back from an API, the <strong>JSON</strong> node extracts the exact field you need. If a value needs to be reused later, the <strong>Text</strong> node stores it as a variable. This is automation that thinks, reacts, and persists through app updates and device restarts. Our mission is to put the full power of Android into your hands, without the complexity of traditional development.</p>
     </section>
 
     <!-- SECTION: SETUP -->
@@ -613,30 +613,21 @@
                 </div>
             </div>
             <div class="node-item">
-                <h4>Condition (Search)</h4>
-                <p>The primary decision-maker. It searches the entire UI hierarchy for your specific text string. It is highly efficient and works even if the text is partially obscured by another app or a floating system menu.</p>
+                <h4>JSON</h4>
+                <p>Extracts a specific value from JSON data and saves it as a variable. Use dot paths like <code>data.name</code>, <code>user.profile.email</code>, or <code>items.0.title</code> to filter the exact parameter you need from an API response.</p>
                 <div class="config-tag-container">
-                    <span class="config-tag">Query Text</span>
-                    <span class="config-tag">Search Timeout</span>
-                    <span class="config-tag">Fuzzy Match Logic</span>
+                    <span class="config-tag">Source Variable</span>
+                    <span class="config-tag">Dot Path</span>
+                    <span class="config-tag">Output Variable</span>
                 </div>
             </div>
             <div class="node-item">
-                <h4>Anchor Tap</h4>
-                <p>A "Semantic" tap. Instead of hard-coded coordinates, it finds a word (e.g., "Submit") and clicks exactly where that word is currently located. This is the most reliable way to tap buttons that move during app updates or different screen sizes.</p>
+                <h4>Text</h4>
+                <p>Stores custom text in a named variable so it can be passed to the next node. Use it for reusable messages, API parameters, labels, or any text value that later nodes need to reference.</p>
                 <div class="config-tag-container">
-                    <span class="config-tag">Search Text</span>
-                    <span class="config-tag">X/Y Offset</span>
-                    <span class="config-tag">Auto-Center Target</span>
-                </div>
-            </div>
-            <div class="node-item">
-                <h4>Read Text (Scraper)</h4>
-                <p>Extracts data from the screen. If you tell it to read "Price:", it will capture the value displayed next to that label and save it to a variable for use in later logic, notifications, or API calls. Essential for web scraping or data monitoring.</p>
-                <div class="config-tag-container">
-                    <span class="config-tag">Target Label</span>
+                    <span class="config-tag">Text Value</span>
                     <span class="config-tag">Variable Name</span>
-                    <span class="config-tag">Capture Area Bounds</span>
+                    <span class="config-tag">Allow Variables</span>
                 </div>
             </div>
             <div class="node-item">
@@ -667,7 +658,7 @@
             </div>
             <div class="node-item">
                 <h4>Output Log</h4>
-                <p>Prints custom text to the Home Hub's activity log. Essential for debugging variable values during workflow development. You can see the actual data captured by a Read Text node here for verification.</p>
+                <p>Prints custom text to the Home Hub's activity log. Essential for debugging variable values during workflow development. You can verify values created by Text or JSON nodes here before passing them onward.</p>
                 <div class="config-tag-container">
                     <span class="config-tag">Message Template</span>
                     <span class="config-tag">Log Severity Level</span>
@@ -682,10 +673,10 @@
         <p>Variables are the "short-term memory" of your workflow. They allow data to flow dynamically from one node to another. All variables are case-sensitive and exist only while the specific workflow is running. This prevents data from one workflow from leaking into another, ensuring enterprise-grade data isolation and security.</p>
 
         <h3>Storing Data Points</h3>
-        <p>Data is stored using <strong>Read Text</strong>, <strong>API</strong>, or <strong>Bluetooth Receive</strong> nodes. You assign a name, like <code>current_user</code>. We recommend using <code>snake_case</code> for clarity and to avoid conflicts with system labels. Variables can store numbers, text, or even whole JSON objects from APIs.</p>
+        <p>Data is stored using <strong>Text</strong>, <strong>API</strong>, <strong>JSON</strong>, or <strong>Bluetooth Receive</strong> nodes. You assign a name, like <code>current_user</code>. We recommend using <code>snake_case</code> for clarity and to avoid conflicts with system labels. Variables can store numbers, text, or even whole JSON objects from APIs.</p>
 
         <h3>The Variable Tag Syntax: <code>${name}</code></h3>
-        <p>To use a stored value in any text field (like a Notification message, an API URL, or a Search Text), wrap the variable name in curly braces and a dollar sign. The engine will look up the value at the exact microsecond that node is reached.</p>
+        <p>To use a stored value in any text field (like a Notification message, an API URL, or a Text value), wrap the variable name in curly braces and a dollar sign. The engine will look up the value at the exact microsecond that node is reached.</p>
 
         <div class="code-snippet">
             // Example of String Interpolation:
@@ -697,7 +688,7 @@
         </div>
 
         <div class="callout warning-box">
-            <strong>⚠️ Variable Fallback Logic:</strong> If you use a variable that hasn't been set yet (e.g. <code>${missing_val}</code>), the engine will output the literal text <code>"${missing_val}"</code>. Always ensure your "Read Text" nodes happen <em>before</em> you use the variable in the logical sequence. Check your activity log to see variable assignments in real-time.
+            <strong>⚠️ Variable Fallback Logic:</strong> If you use a variable that hasn't been set yet (e.g. <code>${missing_val}</code>), the engine will output the literal text <code>"${missing_val}"</code>. Always ensure your Text or JSON nodes happen <em>before</em> you use the variable in the logical sequence. Check your activity log to see variable assignments in real-time.
         </div>
     </section>
 
@@ -750,8 +741,8 @@
                     <span>Modern apps use animations (fade-in, slide-up, shared element transitions) that take about 300-500ms. If you tap during the animation, the app will ignore the touch. <strong>Always add a 500ms Delay</strong> after any click that changes the screen state. This is the #1 fix for "skipped" steps.</span>
                 </div>
                 <div class="feature-item">
-                    <strong>Anchor > Coordinate Rule</strong>
-                    <span>Pixel coordinates change if you rotate your screen or change phone models. **Anchor Taps** work by finding text labels, making your workflows "Resolution Independent." Always use them if you plan to share your workflow JSON with the community or use it on multiple devices.</span>
+                    <strong>Coordinate Consistency Rule</strong>
+                    <span>Pixel coordinates can change if you rotate your screen, adjust display scaling, or switch phone models. Record and run flows in the same orientation, and keep display settings stable when sharing workflow JSON.</span>
                 </div>
                 <div class="feature-item">
                     <strong>Smart Wait-Then-Act Pattern</strong>
@@ -797,7 +788,7 @@
                     <tr>
                         <td><strong>Taps miss the target button</strong></td>
                         <td>Display scaling or font size too large. Device rotation.</td>
-                        <td>Reset Android Display settings to default or use <strong>Anchor Taps</strong>. Ensure the target app is in the same orientation as when recorded.</td>
+                        <td>Reset Android Display settings to default. Ensure the target app is in the same orientation as when recorded.</td>
                     </tr>
                     <tr>
                         <td><strong>Workflow stops mid-run without error</strong></td>
@@ -848,8 +839,8 @@
             <p>The process of injecting a variable's value into a text field using the <code>${name}</code> syntax at runtime. E.g. "Price is ${price}" becomes "Price is $5.00" when processed by the engine.</p>
         </div>
         <div class="glossary-item">
-            <span class="glossary-term">Anchor</span>
-            <p>A text-based landmark on the screen used as a reference point for clicking or reading data. Anchors make workflows work across different phone models regardless of pixel density.</p>
+            <span class="glossary-term">JSON Path</span>
+            <p>A dot-based selector used by the JSON node to extract nested response data, such as <code>data.name</code> or <code>user.profile.email</code>.</p>
         </div>
     </section>
 
